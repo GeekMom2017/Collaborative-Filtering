@@ -1,4 +1,6 @@
-This code is a python implementation of a user-based collaborative filtering model where the features of each items and users' preferences for those features are learned implicitly through gradient descent.
+This code is a Python implementation of a user-based collaborative filtering model where the features of each items and users' preferences for those features are learned implicitly through matrix factorization and gradient descent.
+
+
 
 Data from https://grouplens.org/datasets/movielens/100k/
 
