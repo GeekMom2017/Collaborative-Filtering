@@ -27,6 +27,7 @@ def read_in_data(file_path):
 
 def create_matrix(data):
     '''
+    tranform data into matrix form
     data is a tuple of numpy arrays: user_id, item_id, rating, timestamp
     '''
     # parameters
@@ -70,7 +71,10 @@ def load_data(saved_name):
 
 def train(data_matrix, n_items, n_users, n_features, n_folds, alpha, reg_lambda, monitor='val_loss', seed=0):
     '''
-    train model
+    This function trains model by:
+    1- randomly initialize feature and theta vectors
+    2- update weights through gradient descent until the monitor value moves in the undesired direction
+    3- output a dictionary of features, thetas, training losses, training errors, validation losses, and validation errors
     '''
 	
     output_dict = {'features':[], 'thetas':[], 'train_losses':[], 'train_errors':[], 'val_losses':[], 'val_errors':[]}
@@ -148,8 +152,15 @@ def train(data_matrix, n_items, n_users, n_features, n_folds, alpha, reg_lambda,
 def create_train_val_test_data(data_matrix, test_size=None, n_folds=None):
     '''
     split data into train, val, & test sets
-    test_size percentage of all data is used for testing
-    only available ratings are used for testing & validation
+    only available ratings are used for testing & validation, ie., items that were not rated won't be in the test or validation sets
+    for testing purposes:
+        - test_size argument is passed
+        - test_size percentage of all data is used for testing
+    for validation purposes:
+        - n_fold argument is passed
+
+    when doing either testing or validating, each user is present in both test/val and train sets.
+    
     '''
     
     # parameters
